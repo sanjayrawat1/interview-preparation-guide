@@ -83,6 +83,24 @@ public class P3Permutations {
         return result;
     }
 
+    public static List<List<Integer>> generatePermutationRecursive(int[] nums) {
+        List<List<Integer>> subsets = new ArrayList<>();
+        generatePermutationRecursive(nums, 0, new ArrayList<>(), subsets);
+        return subsets;
+    }
+
+    private static void generatePermutationRecursive(int[] nums, int index, List<Integer> currentPermutation, List<List<Integer>> subsets) {
+        if (index == nums.length) {
+            subsets.add(new ArrayList<>(currentPermutation));
+        } else {
+            for (int i = 0; i < currentPermutation.size() + 1; i++) {
+                List<Integer> newPermutation = new ArrayList<>(currentPermutation);
+                newPermutation.add(i, nums[index]);
+                generatePermutationRecursive(nums, index + 1, newPermutation, subsets);
+            }
+        }
+    }
+
     public static void main(String[] args) {
         //[3, 2, 1], [2, 3, 1], [2, 1, 3], [3, 1, 2], [1, 3, 2], [1, 2, 3]
         assertThat(findPermutations(new int[] {1, 2, 3}))
@@ -91,6 +109,13 @@ public class P3Permutations {
         assertThat(findPermutations(new int[] {0, 1})).containsExactlyInAnyOrder(List.of(0, 1), List.of(1, 0));
 
         assertThat(findPermutations(new int[] {1})).containsExactlyInAnyOrder(List.of(1));
+
+        assertThat(generatePermutationRecursive(new int[] {1, 2, 3}))
+                .containsExactlyInAnyOrder(List.of(3, 2, 1), List.of(2, 3, 1), List.of(2, 1, 3), List.of(3, 1, 2), List.of(1, 3, 2), List.of(1, 2, 3));
+
+        assertThat(generatePermutationRecursive(new int[] {0, 1})).containsExactlyInAnyOrder(List.of(0, 1), List.of(1, 0));
+
+        assertThat(generatePermutationRecursive(new int[] {1})).containsExactlyInAnyOrder(List.of(1));
     }
 
 }
