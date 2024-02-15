@@ -95,8 +95,37 @@ public class P5BalancedParentheses {
         return validParentheses;
     }
 
+    public static List<String> generateValidParenthesesRecursive(int num) {
+        List<String> result = new ArrayList<>();
+        char[] parenthesesString = new char[2 * num];
+        generateValidParenthesesRecursive(num, 0, 0, parenthesesString, 0, result);
+        return result;
+    }
+
+    private static void generateValidParenthesesRecursive(int num, int openCount, int closeCount, char[] parenthesesString, int index,
+                                                          List<String> result) {
+        // if we've reached the maximum number of open and close parentheses, add to the result
+        if (openCount == num && closeCount == num) {
+            result.add(new String(parenthesesString));
+        } else {
+            // if we can add an open parentheses, add it
+            if (openCount < num) {
+                parenthesesString[index] = '(';
+                generateValidParenthesesRecursive(num, openCount + 1, closeCount, parenthesesString, index + 1, result);
+            }
+            // if we can add a close parentheses, add it
+            if (closeCount < openCount) {
+                parenthesesString[index] = ')';
+                generateValidParenthesesRecursive(num, openCount, closeCount + 1, parenthesesString, index + 1, result);
+            }
+        }
+    }
+
     public static void main(String[] args) {
         assertThat(generateValidParentheses(1)).containsExactlyInAnyOrder("()");
         assertThat(generateValidParentheses(3)).containsExactlyInAnyOrder("((()))", "(()())", "(())()", "()(())", "()()()");
+
+        assertThat(generateValidParenthesesRecursive(1)).containsExactlyInAnyOrder("()");
+        assertThat(generateValidParenthesesRecursive(3)).containsExactlyInAnyOrder("((()))", "(()())", "(())()", "()(())", "()()()");
     }
 }
