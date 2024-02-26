@@ -18,6 +18,20 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class P4NextLetter {
 
+    /**
+     * <ol>
+     *     <li> The array is considered circular, which means if the 'key' is bigger than the last letter of
+     *          the array or if it is smaller than the first letter of the array, the key's next letter will
+     *          be the first letter of the array.
+     *     <li> We have to find the next biggest letter which can't be equal to the 'key'. This means that
+     *          we will ignore the case where key == arr[middle]. To handle this case, we can update our start
+     *          range to start = middle + 1.
+     *     <li> In the end, instead of returning the element pointed out by start, we have to return the letter
+     *          pointed out by `start % array.length`. This is needed because of point 2. Imagine that the
+     *          last letter of the array is equal to the 'key'. In that case, we have to return the first
+     *          letter of the input array.
+     * </ol>
+     */
     public static char nextLetter(char[] letters, int key) {
         int start = 0;
         int end = letters.length - 1;
