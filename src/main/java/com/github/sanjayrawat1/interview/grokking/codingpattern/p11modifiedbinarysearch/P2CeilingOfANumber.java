@@ -12,6 +12,16 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class P2CeilingOfANumber {
 
+    /**
+     * We will try to search the 'key' in the given array. If we find the 'key', we return its 'index' as the
+     * ceiling. If we can find the 'key', the next big number will be pointed out by the index 'start'.
+     * <br>
+     * Since we are always adjusting our range to find the 'key', when we exit the loop, the start of our range
+     * will point to the smallest number greater than the 'key'.
+     * <br>
+     * We can add a check in the beginning to see if the 'key' is bigger than the biggest number in the input
+     * array. If so, we can return -1.
+     */
     public static int searchCeilingOfNumber(int[] arr, int key) {
         int start = 0;
         int end = arr.length - 1;
