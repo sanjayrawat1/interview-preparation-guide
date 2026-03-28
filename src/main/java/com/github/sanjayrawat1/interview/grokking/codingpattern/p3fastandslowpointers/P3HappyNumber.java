@@ -75,9 +75,12 @@ public class P3HappyNumber {
     private static int findSquareSum(int num) {
         int squaredSum = 0;
         while (num > 0) {
+            // extract the last digit
             int remainder = num % 10;
+            // add the square of the extracted digit in the sum.
             squaredSum += remainder * remainder;
-            num = num / 2;
+            // truncate (remove) the last digit from 'num' using floor division
+            num = num / 10;
         }
         return squaredSum;
     }
