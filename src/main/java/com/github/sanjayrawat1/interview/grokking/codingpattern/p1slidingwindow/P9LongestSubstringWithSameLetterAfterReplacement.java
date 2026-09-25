@@ -37,11 +37,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class P9LongestSubstringWithSameLetterAfterReplacement {
 
     public static void main(String[] args) {
-        assertThat(slidingWindow("ABAB", 2)).isEqualTo(4);
-        assertThat(slidingWindow("AABABBA", 1)).isEqualTo(4);
-        assertThat(slidingWindow("AABCCBB", 2)).isEqualTo(5);
-        assertThat(slidingWindow("ABBCB", 1)).isEqualTo(4);
-        assertThat(slidingWindow("ABCCDE", 1)).isEqualTo(3);
+        assertThat(longest_uniform_substring_after_replacements("ABAB", 2)).isEqualTo(4);
+        assertThat(longest_uniform_substring_after_replacements("AABABBA", 1)).isEqualTo(4);
+        assertThat(longest_uniform_substring_after_replacements("AABCCBB", 2)).isEqualTo(5);
+        assertThat(longest_uniform_substring_after_replacements("ABBCB", 1)).isEqualTo(4);
+        assertThat(longest_uniform_substring_after_replacements("ABCCDE", 1)).isEqualTo(3);
     }
 
     /**
@@ -81,6 +81,32 @@ public class P9LongestSubstringWithSameLetterAfterReplacement {
             }
 
             maxLength = Math.max(maxLength, right - left + 1);
+        }
+
+        return maxLength;
+    }
+
+    public static int longest_uniform_substring_after_replacements(String s, Integer k) {
+        Map<Character, Integer> charsFrequency = new HashMap<>();
+        int highestFrequency = 0;
+        int maxLength = 0;
+        int left = 0;
+        int right = 0;
+
+        while (right < s.length()) {
+            char rightChar = s.charAt(right);
+            charsFrequency.put(rightChar, charsFrequency.getOrDefault(rightChar, 0) + 1);
+            highestFrequency = Math.max(highestFrequency, charsFrequency.get(rightChar));
+
+            int numCharsToReplace = (right - left + 1) - highestFrequency;
+            if (numCharsToReplace > k) {
+                char leftChar = s.charAt(left);
+                charsFrequency.put(leftChar, charsFrequency.get(leftChar) - 1);
+                left++;
+            }
+
+            maxLength = right - left + 1;
+            right++;
         }
 
         return maxLength;
