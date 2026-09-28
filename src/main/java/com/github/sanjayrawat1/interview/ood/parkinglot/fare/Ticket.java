@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
+ * <p>
+ * This object represents a parking ticket issued when a Vehicle enters the parking lot.
  *
  * @author sanjayrawat1
  */

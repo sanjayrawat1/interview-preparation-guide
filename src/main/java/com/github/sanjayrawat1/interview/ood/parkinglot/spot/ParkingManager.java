@@ -8,6 +8,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * <p>
+ * This object oversees the parking lot’s spot allocation, managing the assignment, lookup, and release of ParkingSpot instances.
+ * It ensures a Vehicle gets the right spot by checking availability based on size, and updates the system when vehicles leave,
+ * keeping parking operations smooth and efficient.
  *
  * @author sanjayrawat1
  */

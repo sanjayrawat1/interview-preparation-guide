@@ -10,6 +10,9 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
+ * <p>
+ * This acts as a facade, providing a central interface to manage the system’s key functionalities: vehicle entry,
+ * spot assignment, ticketing, and fee calculation.
  *
  * @author sanjayrawat1
  */
